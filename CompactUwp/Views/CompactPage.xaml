@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="CompactUwp.Views.CompactPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid
+        x:Name="ContentArea"
+        Margin="{StaticResource MediumLeftRightMargin}">
+
+        <ScrollViewer>
+            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+                Place your content here.-->
+            <StackPanel>
+                <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">选择要处理的文件夹</TextBlock>
+                <Button Padding="32,12">打开文件夹</Button>
+                <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">选择压缩算法</TextBlock>
+                <RadioButton>XPRESS 4K (非常快, 低压缩强度)</RadioButton>
+                <RadioButton>XPRESS 8K (适中的速度和压缩强度)</RadioButton>
+                <RadioButton>XPRESS 16K (慢, 高强度压缩)</RadioButton>
+                <RadioButton>LZX (特别慢, 最强压缩)</RadioButton>
+                <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">高级压缩选项</TextBlock>
+                <ToggleSwitch IsOn="True">压缩子文件夹的中的文件</ToggleSwitch>
+                <ToggleSwitch>即使压缩过, 也要重新压缩</ToggleSwitch>
+                <ToggleSwitch>除了普通文件, 也要压缩隐藏文件和系统文件</ToggleSwitch>
+                <ToggleSwitch>标记文件夹，以后添加的文件应该按照这个算法压缩</ToggleSwitch>
+                <Button Padding="64,24">添加到任务队列</Button>
+            </StackPanel>
+        </ScrollViewer>
+        <!--  Adaptive triggers  -->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowStates">
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="640"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TitlePage.Margin" Value="48,0,12,7"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>
