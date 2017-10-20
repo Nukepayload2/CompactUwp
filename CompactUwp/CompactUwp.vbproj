@@ -228,6 +228,7 @@
     <None Include="CompactUwp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\TitleBarService.vb" />
     <Compile Include="ViewModels\ShellNavigationItem.vb" />
   </ItemGroup>
   <ItemGroup>

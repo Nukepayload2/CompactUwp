@@ -94,13 +94,6 @@ Namespace Services
             RaiseEvent NavigationFailed(sender, e)
         End Sub
 
-        Sub New()
-            AddHandler CoreApplication.GetCurrentView.TitleBar.LayoutMetricsChanged,
-                Sub(s, e)
-                    ShellViewModel.Instance.TitleMargin = New Thickness(12 + s.SystemOverlayLeftInset, 8, 8, 8)
-                End Sub
-        End Sub
-
         Private Sub Frame_Navigated(sender As Object, e As NavigationEventArgs)
             RaiseEvent Navigated(sender, e)
             If e.NavigationMode <> NavigationMode.Back Then

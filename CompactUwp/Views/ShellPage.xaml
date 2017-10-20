@@ -29,12 +29,14 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="32"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{x:Bind ViewModel.Title,Mode=OneTime}"
-                   Margin="{x:Bind ViewModel.TitleMargin,Mode=OneWay}"
-                   Style="{ThemeResource CaptionTextBlockStyle}"/>
+        <Border Height="32" Visibility="{x:Bind ViewModel.TitleBarVisibility,Mode=OneWay}" Background="{ThemeResource SystemControlAltMediumLowAcrylicWindowMediumBrush}">
+            <TextBlock Text="{x:Bind ViewModel.Title,Mode=OneTime}"
+                       Margin="{x:Bind ViewModel.TitleMargin,Mode=OneWay}"
+                       Style="{ThemeResource CaptionTextBlockStyle}"/>
+        </Border>
         <NavigationView
             x:Name="NavigationMenu" Grid.Row="1"
             MenuItemsSource="{x:Bind ViewModel.PrimaryItems}"

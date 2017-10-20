@@ -1,8 +1,9 @@
-﻿Imports CompactUwp.ViewModels
+﻿Imports CompactUwp.Services
+Imports CompactUwp.ViewModels
 
 Namespace Views
-    Public NotInheritable Partial Class ShellPage
-      Inherits Page
+    Partial Public NotInheritable Class ShellPage
+        Inherits Page
 
         Public ReadOnly Property ViewModel As New ShellViewModel
 
@@ -22,6 +23,10 @@ Namespace Views
             If cmd.CanExecute(selected) Then
                 cmd.Execute(selected)
             End If
+        End Sub
+
+        Private Async Sub ShellPage_LoadedAsync(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+            TitleBarService.SetTitleBarHeight()
         End Sub
     End Class
 End Namespace

@@ -20,6 +20,16 @@ Namespace ViewModels
             _Instance = Me
         End Sub
 
+        Dim _TitleBarVisibility As Visibility
+        Public Property TitleBarVisibility As Visibility
+            Get
+                Return _TitleBarVisibility
+            End Get
+            Set(value As Visibility)
+                [Set](_TitleBarVisibility, value)
+            End Set
+        End Property
+
         Public ReadOnly Property Title As String
             Get
                 Return Package.Current.DisplayName

@@ -28,8 +28,8 @@ NotInheritable Partial Class App
         If Not args.PrelaunchActivated Then
             Await ActivationService.ActivateAsync(args)
         End If
-
-        CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = True
+        Dim titleBarC = CoreApplication.GetCurrentView.TitleBar
+        titleBarC.ExtendViewIntoTitleBar = True
         Dim titleBar As ApplicationViewTitleBar = ApplicationView.GetForCurrentView().TitleBar
         titleBar.ButtonBackgroundColor = Colors.Transparent
         titleBar.ButtonInactiveBackgroundColor = Colors.Transparent
