@@ -27,16 +27,23 @@
             </Grid>
         </DataTemplate>
     </Page.Resources>
-
-    <NavigationView
-        x:Name="NavigationMenu"
-        MenuItemsSource="{x:Bind ViewModel.PrimaryItems}"
-        MenuItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
-        Header="{x:Bind ViewModel.LastSelectedItem.Label,Mode=OneWay}"
-        IsSettingsVisible="True">
-
-        <Frame x:Name="shellFrame"/>
-    </NavigationView>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{x:Bind ViewModel.Title,Mode=OneTime}"
+                   Margin="{x:Bind ViewModel.TitleMargin,Mode=OneWay}"
+                   Style="{ThemeResource CaptionTextBlockStyle}"/>
+        <NavigationView
+            x:Name="NavigationMenu" Grid.Row="1"
+            MenuItemsSource="{x:Bind ViewModel.PrimaryItems}"
+            MenuItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
+            Header="{x:Bind ViewModel.LastSelectedItem.Label,Mode=OneWay}"
+            IsSettingsVisible="True">
+            <Frame x:Name="shellFrame"/>
+        </NavigationView>
+    </Grid>
 
     <!--<controls:HamburgerMenu
             DisplayMode="{x:Bind ViewModel.DisplayMode, Mode=OneWay}"

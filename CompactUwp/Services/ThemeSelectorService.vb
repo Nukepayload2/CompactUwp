@@ -1,33 +1,49 @@
-﻿Imports System.Threading.Tasks
-
-Imports CompactUwp.Helpers
+﻿Imports CompactUwp.Helpers
 
 Imports Windows.Storage
-Imports Windows.UI.Xaml
+Imports Windows.UI
 
 Namespace Services
     Public NotInheritable Class ThemeSelectorService
         Private Sub New()
         End Sub
         Private Const SettingsKey As String = "RequestedTheme"
-        
+
         Public Shared Property Theme As ElementTheme = ElementTheme.Default
 
         Public Shared Async Function InitializeAsync() As Task
             Theme = Await LoadThemeFromSettingsAsync()
+            SetTitleBarForeColor()
         End Function
+
+        Private Shared Sub SetTitleBarForeColor()
+            If TypeOf Window.Current.Content Is FrameworkElement Then
+                Dim frameworkElement = TryCast(Window.Current.Content, FrameworkElement)
+                Dim theme = frameworkElement.RequestedTheme
+                Dim titleBar As ApplicationViewTitleBar = ApplicationView.GetForCurrentView().TitleBar
+                Select Case theme
+                    Case ElementTheme.Dark
+                        titleBar.ButtonForegroundColor = Colors.White
+                    Case ElementTheme.Default
+                        titleBar.ButtonForegroundColor = If(Application.Current.RequestedTheme = ApplicationTheme.Light, Colors.Black, Colors.White)
+                    Case ElementTheme.Light
+                        titleBar.ButtonForegroundColor = Colors.Black
+                End Select
+            End If
+        End Sub
 
         Public Shared Async Function SetThemeAsync(theme As ElementTheme) As Task
             ThemeSelectorService.Theme = theme
 
             SetRequestedTheme()
-            Await SaveThemeInSettingsAsync(Theme)
+            Await SaveThemeInSettingsAsync(theme)
         End Function
 
         Public Shared Sub SetRequestedTheme()
             If TypeOf Window.Current.Content Is FrameworkElement Then
                 Dim frameworkElement = TryCast(Window.Current.Content, FrameworkElement)
                 frameworkElement.RequestedTheme = Theme
+                SetTitleBarForeColor()
             End If
         End Sub
 

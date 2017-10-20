@@ -14,6 +14,28 @@ Namespace ViewModels
     Public Class ShellViewModel
         Inherits Observable
 
+        Public Shared ReadOnly Property Instance As ShellViewModel
+
+        Sub New()
+            _Instance = Me
+        End Sub
+
+        Public ReadOnly Property Title As String
+            Get
+                Return Package.Current.DisplayName
+            End Get
+        End Property
+
+        Dim _TitleMargin As New Thickness(12, 8, 8, 8)
+        Public Property TitleMargin As Thickness
+            Get
+                Return _TitleMargin
+            End Get
+            Set
+                [Set](_TitleMargin, Value)
+            End Set
+        End Property
+
         Private _lastSelectedItem As ShellNavigationItem
 
         Private _primaryItems As New ObservableCollection(Of ShellNavigationItem)()
@@ -50,10 +72,16 @@ Namespace ViewModels
             End Set
         End Property
 
-        Public Sub Initialize(frame As Frame)
+        Public Shared Property SuppressPageNavigation As Boolean
+
+        Public Sub Initialize(frame As Frame, nav As NavigationView)
             NavigationService.Frame = frame
+            NavigationService.NavigationView = nav
             AddHandler NavigationService.Frame.Navigated, AddressOf Frame_Navigated
             PopulateNavItems()
+            For Each sh In _primaryItems.Concat(_secondaryItems)
+                NavigationService.PageTypeNavItem.Add(sh.PageType.Name, sh)
+            Next
         End Sub
 
         Private Sub PopulateNavItems()
@@ -64,11 +92,11 @@ Namespace ViewModels
             ' More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
             ' Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/projectTypes/navigationpane.md
             ' Edit String/en-US/Resources.resw: Add a menu item title for each page
-            _primaryItems.Add(ShellNavigationItem.FromType(Of MainPage)("Shell_Main".GetLocalized(), Symbol.Document))
-            _primaryItems.Add(ShellNavigationItem.FromType(Of CompactPage)("Shell_Compact".GetLocalized(), Symbol.Document))
-            _primaryItems.Add(ShellNavigationItem.FromType(Of RevertCompactPage)("Shell_RevertCompact".GetLocalized(), Symbol.Document))
-            _primaryItems.Add(ShellNavigationItem.FromType(Of ManageTasksPage)("Shell_ManageTasks".GetLocalized(), Symbol.Document))
-            _primaryItems.Add(ShellNavigationItem.FromType(Of HelpPage)("Shell_Help".GetLocalized(), Symbol.Document))
+            _primaryItems.Add(ShellNavigationItem.FromType(Of MainPage)("Shell_Main".GetLocalized(), Symbol.Home))
+            _primaryItems.Add(ShellNavigationItem.FromType(Of CompactPage)("Shell_Compact".GetLocalized(), Symbol.ClosePane))
+            _primaryItems.Add(ShellNavigationItem.FromType(Of RevertCompactPage)("Shell_RevertCompact".GetLocalized(), Symbol.OpenPane))
+            _primaryItems.Add(ShellNavigationItem.FromType(Of ManageTasksPage)("Shell_ManageTasks".GetLocalized(), Symbol.List))
+            _primaryItems.Add(ShellNavigationItem.FromType(Of HelpPage)("Shell_Help".GetLocalized(), Symbol.Library))
             _secondaryItems.Add(ShellNavigationItem.FromType(Of SettingsPage)("Shell_Settings".GetLocalized(), Symbol.Setting))
         End Sub
 

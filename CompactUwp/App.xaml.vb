@@ -2,6 +2,8 @@
 
 Imports Windows.ApplicationModel
 Imports Windows.ApplicationModel.Activation
+Imports Windows.ApplicationModel.Core
+Imports Windows.UI
 Imports Windows.UI.Xaml
 
 NotInheritable Partial Class App
@@ -26,6 +28,11 @@ NotInheritable Partial Class App
         If Not args.PrelaunchActivated Then
             Await ActivationService.ActivateAsync(args)
         End If
+
+        CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = True
+        Dim titleBar As ApplicationViewTitleBar = ApplicationView.GetForCurrentView().TitleBar
+        titleBar.ButtonBackgroundColor = Colors.Transparent
+        titleBar.ButtonInactiveBackgroundColor = Colors.Transparent
     End Sub
 
     Protected Overrides Async Sub OnActivated(args As IActivatedEventArgs)

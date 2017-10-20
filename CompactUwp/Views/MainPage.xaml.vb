@@ -1,9 +1,9 @@
 ﻿Imports CompactUwp.ViewModels
 
 Namespace Views
-    Public NotInheritable Partial Class MainPage
+    Partial Public NotInheritable Class MainPage
         Inherits Page
-            property ViewModel as MainViewModel = New MainViewModel
+        Property ViewModel As New MainViewModel
 
     End Class
 End Namespace

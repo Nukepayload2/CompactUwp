@@ -97,6 +97,9 @@ Namespace Services
         End Sub
 
         Private Sub ActivationService_BackRequested(sender As Object, e As BackRequestedEventArgs)
+            If e.Handled Then
+                Return
+            End If
             If NavigationService.CanGoBack Then
                 NavigationService.GoBack()
                 e.Handled = True

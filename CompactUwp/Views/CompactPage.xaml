@@ -17,7 +17,7 @@
                 <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">选择要处理的文件夹</TextBlock>
                 <Button Padding="32,12">打开文件夹</Button>
                 <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">选择压缩算法</TextBlock>
-                <RadioButton>XPRESS 4K (非常快, 低压缩强度)</RadioButton>
+                <RadioButton IsChecked="True">XPRESS 4K (非常快, 低压缩强度)</RadioButton>
                 <RadioButton>XPRESS 8K (适中的速度和压缩强度)</RadioButton>
                 <RadioButton>XPRESS 16K (慢, 高强度压缩)</RadioButton>
                 <RadioButton>LZX (特别慢, 最强压缩)</RadioButton>
