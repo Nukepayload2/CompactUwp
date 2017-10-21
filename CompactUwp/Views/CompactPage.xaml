@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
+    
     <Grid
         x:Name="ContentArea"
         Margin="{StaticResource MediumLeftRightMargin}">
@@ -15,18 +16,38 @@
                 Place your content here.-->
             <StackPanel>
                 <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">选择要处理的文件夹</TextBlock>
-                <Button Padding="32,12">打开文件夹</Button>
-                <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">选择压缩算法</TextBlock>
-                <RadioButton IsChecked="True">XPRESS 4K (非常快, 低压缩强度)</RadioButton>
-                <RadioButton>XPRESS 8K (适中的速度和压缩强度)</RadioButton>
-                <RadioButton>XPRESS 16K (慢, 高强度压缩)</RadioButton>
-                <RadioButton>LZX (特别慢, 最强压缩)</RadioButton>
+                <Button Padding="32,12" Style="{ThemeResource ButtonRevealStyle}">打开文件夹</Button>
+                <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">选择压缩模式</TextBlock>
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="6*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB4C;" />
+                        <Slider Grid.Column="1" Maximum="3" TickFrequency="1"/>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE726;" Grid.Column="2" />
+                    </Grid>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock HorizontalAlignment="Center">最快 (默认)</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" Grid.Column="1">均衡</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" Grid.Column="2">高压缩</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" Grid.Column="3">最高压缩</TextBlock>
+                    </Grid>
+                </StackPanel>
                 <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">高级压缩选项</TextBlock>
                 <ToggleSwitch IsOn="True">压缩子文件夹的中的文件</ToggleSwitch>
                 <ToggleSwitch>即使压缩过, 也要重新压缩</ToggleSwitch>
                 <ToggleSwitch>除了普通文件, 也要压缩隐藏文件和系统文件</ToggleSwitch>
                 <ToggleSwitch>标记文件夹，以后添加的文件应该按照这个算法压缩</ToggleSwitch>
-                <Button Padding="64,24">添加到任务队列</Button>
+                <Button Padding="32,12"  Style="{ThemeResource ButtonRevealStyle}">添加到任务队列</Button>
             </StackPanel>
         </ScrollViewer>
         <!--  Adaptive triggers  -->

@@ -25,7 +25,7 @@ Namespace Views
             End If
         End Sub
 
-        Private Async Sub ShellPage_LoadedAsync(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        Private Sub ShellPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
             TitleBarService.SetTitleBarHeight()
         End Sub
     End Class

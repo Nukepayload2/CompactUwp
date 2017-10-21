@@ -132,6 +132,7 @@
     <Compile Include="Activation\ActivationHandler.vb" />
     <Compile Include="Models\HelpItem.vb" />
     <Compile Include="Commands\RemoveTaskItemCommand.vb" />
+    <Compile Include="Models\MainCommandItem.vb" />
     <Compile Include="Models\TaskItem.vb" />
     <Compile Include="Services\ActivationService.vb" />
     <Compile Include="Activation\DefaultLaunchActivationHandler.vb" />

@@ -67,6 +67,10 @@ Namespace Services
             ShellViewModel.SuppressPageNavigation = False
         End Sub
 
+        Public Sub NavBarSelect(pageType As Type)
+            NavigationView.SelectedItem = PageTypeNavItem(pageType.Name)
+        End Sub
+
         Public Function Navigate(pageType As Type, Optional ByVal parameter As Object = Nothing, Optional ByVal infoOverride As NavigationTransitionInfo = Nothing) As Boolean
             ' Don't open the same page multiple times
             If Frame.Content?.GetType IsNot pageType.GetType Then

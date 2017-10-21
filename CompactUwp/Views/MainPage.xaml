@@ -4,17 +4,44 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:CompactUwp.Models"
     Style="{StaticResource PageStyle}"
     mc:Ignorable="d">
     <Grid
         x:Name="ContentArea"
         Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-        <Grid >
-            <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
+        <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
-            <TextBlock x:Uid="FirstRun_Body" TextWrapping="Wrap"></TextBlock>
-        </Grid>
+        <StackPanel>
+            <TextBlock Style="{StaticResource HeaderTextBlockStyle}">压缩您的应用和游戏。</TextBlock>
+            <TextBlock Margin="0,16" x:Uid="FirstRun_Body" TextWrapping="Wrap"></TextBlock>
+        </StackPanel>
+
+        <GridView x:Name="GrdFeatures" Grid.Row="1" ItemsSource="{x:Bind ViewModel.StatusCommands}" IsItemClickEnabled="True">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="model:MainCommandItem">
+                    <StackPanel>
+                        <Viewbox Width="48" Height="48" Margin="4">
+                            <SymbolIcon Symbol="{x:Bind Icon}"/>
+                        </Viewbox>
+                        <TextBlock Text="{x:Bind Title}" Style="{ThemeResource ListSubTitleStyle}" Margin="2"/>
+                        <TextBlock Text="{x:Bind Text,Mode=OneWay}" MaxWidth="160" Margin="2" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Margin" Value="4"/>
+                    <Setter Property="Padding" Value="4"/>
+                </Style>
+            </GridView.ItemContainerStyle>
+        </GridView>
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

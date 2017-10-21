@@ -27,6 +27,7 @@ Namespace ViewModels
             End Get
             Set(value As Visibility)
                 [Set](_TitleBarVisibility, value)
+                OnPropertyChanged(NameOf(TitleMargin))
             End Set
         End Property
 
@@ -37,9 +38,10 @@ Namespace ViewModels
         End Property
 
         Dim _TitleMargin As New Thickness(12, 8, 8, 8)
+
         Public Property TitleMargin As Thickness
             Get
-                Return _TitleMargin
+                Return If(_TitleBarVisibility = Visibility.Visible, _TitleMargin, Nothing)
             End Get
             Set
                 [Set](_TitleMargin, Value)
