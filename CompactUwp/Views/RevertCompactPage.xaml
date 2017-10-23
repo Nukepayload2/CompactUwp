@@ -10,10 +10,23 @@
         x:Name="ContentArea"
         Margin="{StaticResource MediumLeftRightMargin}">
 
-        <Grid >
+        <ScrollViewer>
             <!--The SystemControlPageBackgroundChromeLowBrush background represents where you should place your content. 
                 Place your content here.-->
-        </Grid>
+            <StackPanel>
+                <TextBlock Margin="0,0,0,4" Style="{ThemeResource SubtitleTextBlockStyle}">选择要还原的文件夹</TextBlock>
+                <TextBlock Margin="0,4" Style="{ThemeResource BodyTextBlockStyle}">如果被压缩过的文件夹体积没有明显变小，则建议解压缩那个文件夹以降低读取文件时的 CPU 使用率。这项功能也可以用来恢复压缩了一半的文件夹。</TextBlock>
+                <TextBlock Margin="0,4" Style="{ThemeResource BaseTextBlockStyle}">打开一个被压缩过的文件夹</TextBlock>
+                <Button Padding="32,12" Style="{ThemeResource ButtonRevealStyle}">打开文件夹</Button>
+                <TextBlock Margin="0,16,0,8" Style="{ThemeResource SubtitleTextBlockStyle}">高级解压选项</TextBlock>
+                <ToggleSwitch IsOn="True">解压子文件夹的中的文件</ToggleSwitch>
+                <ToggleSwitch>强制重新压缩文件, 可修复中途取消的压缩和解压</ToggleSwitch>
+                <ToggleSwitch>除了普通文件, 也要解压隐藏文件和系统文件</ToggleSwitch>
+                <ToggleSwitch>取消标记文件夹，新文件不应该被压缩</ToggleSwitch>
+                <TextBlock Margin="0,4" Style="{ThemeResource BaseTextBlockStyle}">添加到任务队列以便解压缩</TextBlock>
+                <Button Padding="32,12"  Style="{ThemeResource ButtonRevealStyle}">添加到任务队列</Button>
+            </StackPanel>
+        </ScrollViewer>
         <!--  Adaptive triggers  -->
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">

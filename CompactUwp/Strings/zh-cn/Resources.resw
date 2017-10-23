@@ -198,7 +198,7 @@
     <comment>Navigation view item name for Settings</comment>
   </data>
   <data name="FirstRun_Body.Text" xml:space="preserve">
-    <value>Compact UWP 是一款文件压缩工具。能够在不同程度上缩减应用和游戏占用的磁盘空间，而对性能产生较小的影响。原理是调用系统工具 Compact.exe 。</value>
+    <value>Compact UWP 是一款文件压缩工具。能够在不同程度上缩减应用和游戏占用的磁盘空间，而对性能产生较小的影响。原理是使用 NTFS 压缩功能。</value>
     <comment>First use prompt message body</comment>
   </data>
   <data name="FirstRun_Title.Text" xml:space="preserve">
