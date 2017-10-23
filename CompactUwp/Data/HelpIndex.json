@@ -1,0 +1,30 @@
+﻿[
+  {
+    "Title": "功能和建议使用的情况",
+    "FileName": "fest.md"
+  },
+  {
+    "Title": "注意事项和禁忌",
+    "FileName": "dos-and-donts.md"
+  },
+  {
+    "Title": "如何：压缩文件夹",
+    "FileName": "how-to-compact.md"
+  },
+  {
+    "Title": "如何：解压文件夹",
+    "FileName": "how-to-decompress.md"
+  },
+  {
+    "Title": "如何：使用本软件优化应用和游戏的存储",
+    "FileName": "how-to-optimize-app-game.md"
+  },
+  {
+    "Title": "如何: 应对异常情况",
+    "FileName": "error-handling.md"
+  },
+  {
+    "Title": "针对开发人员的参考",
+    "FileName": "developer-ref.md"
+  }
+]

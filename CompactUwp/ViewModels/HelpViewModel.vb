@@ -12,33 +12,33 @@ Namespace ViewModels
     Public Class HelpViewModel
         Inherits Observable
 
-        Private _selected As SampleOrder
+        Private _selected As HelpItem
 
-        Public Property Selected As SampleOrder
+        Public Property Selected As HelpItem
             Get
                 Return _selected
             End Get
             Set
-                [Set](_selected, value)
+                [Set](_selected, Value)
             End Set
         End Property
 
-        Public Property SampleItems As ObservableCollection(Of SampleOrder) = new ObservableCollection(Of SampleOrder)
+        Public ReadOnly Property HelpItems As New ObservableCollection(Of HelpItem)
 
         Public Sub New()
         End Sub
 
         Public Async Function LoadDataAsync(viewState As MasterDetailsViewState) As Task
-            SampleItems.Clear()
+            HelpItems.Clear()
 
-            Dim data = Await SampleDataService.GetSampleModelDataAsync()
+            Dim data = Await HelpItemsDataService.GetSampleModelDataAsync()
 
-            For Each item As SampleOrder In data
-                SampleItems.Add(item)
+            For Each item As HelpItem In data
+                HelpItems.Add(item)
             Next
 
             If viewState = MasterDetailsViewState.Both Then
-                Selected = SampleItems.First()
+                Selected = HelpItems.First()
             End If
         End Function
     End Class

@@ -187,6 +187,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="Data\fest.md" />
+    <None Include="Data\HelpIndex.json" />
     <PRIResource Include="Strings\zh-cn\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +306,7 @@
     <Compile Include="ViewModels\RevertCompactViewModel.vb" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\SampleDataService.vb" />
+    <Compile Include="Services\HelpItemsService.vb" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\SampleOrder.vb" />
