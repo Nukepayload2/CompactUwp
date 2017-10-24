@@ -1,8 +1,4 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.Linq
-Imports System.Threading.Tasks
-
-Imports CompactUwp.Helpers
+﻿Imports CompactUwp.Helpers
 Imports CompactUwp.Models
 Imports CompactUwp.Services
 
@@ -25,15 +21,16 @@ Namespace ViewModels
 
         Public ReadOnly Property HelpItems As New ObservableCollection(Of HelpItem)
 
-        Public Sub New()
-        End Sub
-
         Public Async Function LoadDataAsync(viewState As MasterDetailsViewState) As Task
+            If HelpItems.Count > 0 Then
+                Return
+            End If
+
             HelpItems.Clear()
 
-            Dim data = Await HelpItemsDataService.GetSampleModelDataAsync()
+            Dim data = Await GetHelpDataAsync()
 
-            For Each item As HelpItem In data
+            For Each item In data
                 HelpItems.Add(item)
             Next
 

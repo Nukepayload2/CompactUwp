@@ -7,13 +7,9 @@ Imports Windows.UI.Xaml.Controls
 Namespace Views
     Partial Public NotInheritable Class HelpPage
         Inherits Page
-        Property ViewModel As HelpViewModel = New HelpViewModel
-        Public Sub New()
-            InitializeComponent()
-            AddHandler Loaded, AddressOf HelpPage_Loaded
-        End Sub
+        ReadOnly Property ViewModel As New HelpViewModel
 
-        Private Async Sub HelpPage_Loaded(sender As Object, e As RoutedEventArgs)
+        Private Async Sub HelpPage_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
             Await ViewModel.LoadDataAsync(MasterDetailsViewControl.ViewState)
         End Sub
 

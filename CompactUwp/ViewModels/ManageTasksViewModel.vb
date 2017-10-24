@@ -1,45 +1,38 @@
-﻿Imports System.Collections.ObjectModel
-Imports System.Linq
-Imports System.Threading.Tasks
-
-Imports CompactUwp.Helpers
+﻿Imports CompactUwp.Helpers
 Imports CompactUwp.Models
-Imports CompactUwp.Services
-
-Imports Microsoft.Toolkit.Uwp.UI.Controls
 
 Namespace ViewModels
     Public Class ManageTasksViewModel
         Inherits Observable
 
-        Private _selected As SampleOrder
+        Private _selected As TaskItem
 
-        Public Property Selected As SampleOrder
+        Public Property Selected As TaskItem
             Get
                 Return _selected
             End Get
             Set
-                [Set](_selected, value)
+                [Set](_selected, Value)
             End Set
         End Property
 
-        Public Property SampleItems As ObservableCollection(Of SampleOrder) = new ObservableCollection(Of SampleOrder)
+        Public ReadOnly Property TaskItems As New ObservableCollection(Of TaskItem) From {
+            New TaskItem With {
+                .Path = "C:\Program Files (x86)\Origin Games\Command and Conquer Red Alert 3",
+                .ShortName = "Command and Conquer Red Alert 3",
+                .Progress = 0.45,
+                .Status = TaskStatus.Running,
+                .TotalSizeInMB = 6875,
+                .TotalSpaceInMB = 5310
+            },
+            New TaskItem With {
+                .Path = "C:\Program Files (x86)\Steam",
+                .ShortName = "Steam",
+                .Progress = 0.0,
+                .Status = TaskStatus.WaitingToRun,
+                .TotalSizeInMB = 6875
+            }
+        }
 
-        Public Sub New()
-        End Sub
-
-        Public Async Function LoadDataAsync(viewState As MasterDetailsViewState) As Task
-            SampleItems.Clear()
-
-            Dim data = Await SampleDataService.GetSampleModelDataAsync()
-
-            For Each item As SampleOrder In data
-                SampleItems.Add(item)
-            Next
-
-            If viewState = MasterDetailsViewState.Both Then
-                Selected = SampleItems.First()
-            End If
-        End Function
     End Class
 End Namespace

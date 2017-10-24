@@ -7,25 +7,44 @@
     Style="{StaticResource PageStyle}"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:model="using:CompactUwp.Models"
+    xmlns:helpers="using:CompactUwp.Helpers"
     xmlns:views="using:CompactUwp.Views"
     mc:Ignorable="d">
     <Page.Resources>
-        <DataTemplate x:Key="ItemTemplate" x:DataType="model:SampleOrder">
-            <Grid Height="64" Padding="0,8">
+        <helpers:TaskStatusToTextConverter x:Key="TaskStatusToTextConverter"/>
+
+        <DataTemplate x:Key="ItemTemplate" x:DataType="model:TaskItem">
+            <Grid Padding="0,8">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <FontIcon Grid.Column="0" Tag="{x:Bind HashIdentIcon}" FontSize="40" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" />
-                <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Bind Company}" Tag="{x:Bind HashIdentTitle}" Style="{ThemeResource ListTitleStyle}"/>
-                    <TextBlock Text="{x:Bind Status}" Style="{StaticResource ListSubTitleStyle}"/>
+                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="{x:Bind ShortName}" Style="{ThemeResource ListTitleStyle}"/>
+                    <TextBlock Text="{x:Bind Status,Mode=OneWay,Converter={StaticResource TaskStatusToTextConverter}}"
+                               Style="{StaticResource ListSubTitleStyle}"/>
+                </StackPanel>
+                <ProgressBar Grid.Row="1" Maximum="1" Value="{x:Bind Progress,Mode=OneWay}" />
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <Button Command="{x:Bind ResumeTaskCommand}" CommandParameter="{x:Bind}">
+                        <SymbolIcon Symbol="Play"/>
+                    </Button>
+                    <Button Command="{x:Bind PauseTaskCommand}" CommandParameter="{x:Bind}">
+                        <SymbolIcon Symbol="Pause"/>
+                    </Button>
+                    <Button Command="{x:Bind CancelTaskCommand}" CommandParameter="{x:Bind}">
+                        <SymbolIcon Symbol="Cancel"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="DetailsTemplate">
-            <views:ManageTasksDetailControl MasterMenuItem="{Binding}"/>
+        <DataTemplate x:Key="DetailsTemplate" x:DataType="model:TaskItem">
+            <views:ManageTasksDetailControl TaskItem="{x:Bind}"/>
         </DataTemplate>
 
         <DataTemplate x:Key="NoSelectionContentTemplate">
@@ -36,12 +55,18 @@
     <Grid>
         <controls:MasterDetailsView
             x:Name="MasterDetailsViewControl"
-            ItemsSource="{x:Bind ViewModel.SampleItems, Mode=OneWay}"
+            ItemsSource="{x:Bind ViewModel.TaskItems, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
             ItemTemplate="{StaticResource ItemTemplate}"
             DetailsTemplate="{StaticResource DetailsTemplate}"
             NoSelectionContentTemplate="{StaticResource NoSelectionContentTemplate}"
             Background="Transparent"
-            BorderBrush="Transparent" />
+            BorderBrush="Transparent" >
+            <controls:MasterDetailsView.ItemContainerStyle>
+                <Style TargetType="ContentControl">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </controls:MasterDetailsView.ItemContainerStyle>
+        </controls:MasterDetailsView>
     </Grid>
 </Page>

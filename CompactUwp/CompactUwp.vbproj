@@ -28,13 +28,15 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>NETFX_CORE,WINDOWS_UWP</DefineConstants>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314,NU1603</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
     <DocumentationFile>CompactUwp.xml</DocumentationFile>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DefineTrace>true</DefineTrace>
@@ -47,8 +49,10 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
     <DocumentationFile>CompactUwp.xml</DocumentationFile>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314,NU1603</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -61,7 +65,9 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>true</Prefer32Bit>
     <DocumentationFile>CompactUwp.xml</DocumentationFile>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314,NU1603</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <DefineTrace>true</DefineTrace>
@@ -74,8 +80,10 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
     <DocumentationFile>CompactUwp.xml</DocumentationFile>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,4231,NU1603</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -89,7 +97,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
     <DocumentationFile>CompactUwp.xml</DocumentationFile>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314,NU1603</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <DefineTrace>true</DefineTrace>
@@ -101,8 +111,10 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>true</Prefer32Bit>
     <DocumentationFile>CompactUwp.xml</DocumentationFile>
-    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42314,NU1603</NoWarn>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</NoWarn>
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
@@ -130,8 +142,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activation\ActivationHandler.vb" />
+    <Compile Include="Commands\ResumeTaskCommand.vb" />
+    <Compile Include="Commands\PauseTaskCommand.vb" />
+    <Compile Include="Helpers\NullableDoubleMBToTextConverter.vb" />
+    <Compile Include="Helpers\TaskStatusToTextConverter.vb" />
     <Compile Include="Models\HelpItem.vb" />
-    <Compile Include="Commands\RemoveTaskItemCommand.vb" />
+    <Compile Include="Commands\CancelTaskCommand.vb" />
     <Compile Include="Models\MainCommandItem.vb" />
     <Compile Include="Models\TaskItem.vb" />
     <Compile Include="Services\ActivationService.vb" />
@@ -187,8 +203,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="Data\fest.md" />
-    <None Include="Data\HelpIndex.json" />
+    <Content Include="Data\developer-ref.md" />
+    <Content Include="Data\dos-and-donts.md" />
+    <Content Include="Data\error-handling.md" />
+    <Content Include="Data\fest.md" />
+    <Content Include="Data\HelpIndex.json" />
+    <Content Include="Data\how-to-compact.md" />
+    <Content Include="Data\how-to-decompress.md" />
+    <Content Include="Data\how-to-optimize-app-game.md" />
     <PRIResource Include="Strings\zh-cn\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
@@ -307,9 +329,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Services\HelpItemsService.vb" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\SampleOrder.vb" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\ManageTasksPage.xaml">

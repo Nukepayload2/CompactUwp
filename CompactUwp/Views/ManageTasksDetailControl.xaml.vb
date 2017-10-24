@@ -7,20 +7,18 @@ Namespace Views
     Public NotInheritable Partial Class ManageTasksDetailControl
         Inherits UserControl
 
-        Public Property MasterMenuItem As SampleOrder
+        Public Property TaskItem As TaskItem
             Get
-                Return TryCast(GetValue(MasterMenuItemProperty), SampleOrder)
+                Return GetValue(TaskItemProperty)
             End Get
             Set
-                SetValue(MasterMenuItemProperty, value)
+                SetValue(TaskItemProperty, Value)
             End Set
         End Property
-
-        Public Shared ReadOnly MasterMenuItemProperty As DependencyProperty = DependencyProperty.Register("MasterMenuItem", GetType(SampleOrder), GetType(ManageTasksDetailControl), New PropertyMetadata(Nothing, AddressOf OnMasterMenuItemPropertyChanged))
-
-        Public Sub New()
-            InitializeComponent()
-        End Sub
+        Public Shared ReadOnly TaskItemProperty As DependencyProperty =
+                               DependencyProperty.Register(NameOf(TaskItem),
+                               GetType(TaskItem), GetType(ManageTasksDetailControl),
+                               New PropertyMetadata(Nothing))
 
         Private Shared Sub OnMasterMenuItemPropertyChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
             Dim control = TryCast(d, ManageTasksDetailControl)

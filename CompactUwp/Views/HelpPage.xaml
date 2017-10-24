@@ -10,22 +10,17 @@
     xmlns:views="using:CompactUwp.Views"
     mc:Ignorable="d">
     <Page.Resources>
-        <DataTemplate x:Key="ItemTemplate" x:DataType="model:SampleOrder">
+
+        <DataTemplate x:Key="ItemTemplate" x:DataType="model:HelpItem">
             <Grid Height="64" Padding="0,8">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <FontIcon Grid.Column="0" Tag="{x:Bind HashIdentIcon}" FontSize="40" Glyph="{x:Bind SymbolAsChar}" VerticalAlignment="Center" />
-                <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Bind Company}" Tag="{x:Bind HashIdentTitle}" Style="{ThemeResource ListTitleStyle}"/>
-                    <TextBlock Text="{x:Bind Status}" Style="{StaticResource ListSubTitleStyle}"/>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{x:Bind Title}" Style="{ThemeResource ListTitleStyle}"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
 
-        <DataTemplate x:Key="DetailsTemplate">
-            <views:HelpDetailControl MasterMenuItem="{Binding}"/>
+        <DataTemplate x:Key="DetailsTemplate" x:DataType="model:HelpItem">
+            <views:HelpDetailControl MasterMenuItem="{x:Bind}"/>
         </DataTemplate>
 
         <DataTemplate x:Key="NoSelectionContentTemplate">
@@ -36,7 +31,7 @@
     <Grid>
         <controls:MasterDetailsView
             x:Name="MasterDetailsViewControl"
-            ItemsSource="{x:Bind ViewModel.SampleItems, Mode=OneWay}"
+            ItemsSource="{x:Bind ViewModel.HelpItems, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
             ItemTemplate="{StaticResource ItemTemplate}"
             DetailsTemplate="{StaticResource DetailsTemplate}"

@@ -1,18 +1,22 @@
-﻿Imports System.Collections.Generic
-Imports System.Collections.ObjectModel
-Imports System.Threading.Tasks
-
-Imports CompactUwp.Models
+﻿Imports CompactUwp.Models
+Imports Windows.Storage
 
 Namespace Services
     ' This module holds sample data used by some generated pages to show how they can be used.
-    ' TODO WTS: Delete this file once your app is using real data.
     Public Module HelpItemsService
-        ' TODO WTS: Remove this once your MasterDetail pages are displaying real data
-        Public Async Function GetSampleModelDataAsync() As Task(Of IEnumerable(Of SampleOrder))
-            Await Task.CompletedTask
+        Private Const HelpPrefix As String = "ms-appx:///Data/"
+        Private Const HelpIndex As String = HelpPrefix + "HelpIndex.json"
 
-            Return AllOrders()
+        Public Async Function GetHelpDataAsync() As Task(Of HelpItem())
+            Dim indexJson = Await StorageFile.GetFileFromApplicationUriAsync(New Uri(HelpIndex))
+            Dim json$ = Await FileIO.ReadTextAsync(indexJson)
+            Dim helpItems = Await Helpers.ToObjectAsync(Of HelpItem())(json)
+            For Each hlp In helpItems
+                Dim mdFile = Await StorageFile.GetFileFromApplicationUriAsync(New Uri(HelpPrefix + hlp.FileName))
+                Dim mdContent = Await FileIO.ReadTextAsync(mdFile)
+                hlp.Text = mdContent
+            Next
+            Return helpItems
         End Function
     End Module
 End Namespace

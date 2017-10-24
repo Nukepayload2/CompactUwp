@@ -73,7 +73,31 @@ Namespace Models
             End Set
         End Property
 
-        Public ReadOnly Property RemoveTaskItemCommand As New RemoveTaskItemCommand
+        Dim _IsUnpack As Boolean
+        Public Property IsUnpack As Boolean
+            Get
+                Return _IsUnpack
+            End Get
+            Set(value As Boolean)
+                _IsUnpack = value
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsUnpack)))
+            End Set
+        End Property
+
+        Dim _IsPaused As Boolean
+        Public Property IsPaused As Boolean
+            Get
+                Return _IsPaused
+            End Get
+            Set(value As Boolean)
+                _IsPaused = value
+                RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(NameOf(IsPaused)))
+            End Set
+        End Property
+
+        Public ReadOnly Property CancelTaskCommand As New CancelTaskCommand
+        Public ReadOnly Property PauseTaskCommand As New PauseTaskCommand
+        Public ReadOnly Property ResumeTaskCommand As New ResumeTaskCommand
 
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
     End Class
